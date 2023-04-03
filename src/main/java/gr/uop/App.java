@@ -12,6 +12,7 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -26,12 +27,15 @@ public class App extends Application {
 
 
         // Initializing items
-        Label label1 = new Label("Κελσίου");
+        Label label1 = new Label("Κελσίου   ");
         Label label2 = new Label("Φαρενάιτ");
+        Label message = new Label();
+        message.setStyle("-fx-text-fill: red;");
 
         label1.setPadding(new Insets(10));
         label2.setPadding(new Insets(10));
-
+        
+        
         HBox hBox = new HBox();
         VBox buttonBox = new VBox();
 
@@ -44,12 +48,76 @@ public class App extends Application {
         Button celToFahr = new Button("->");
         Button fahrToCel = new Button("<-");
         Button clear = new Button("Καθαρισμός");
+
+
+        
+        //Button Actions and Events
+        celToFahr.setEffect(null);  //The buttons did a weird
+        fahrToCel.setEffect(null);  //animation on hover so we disabled it
+        
+        celToFahr.setOnAction((e) ->{
+            
+
+
+            
+            if(tfCelsius.getText().isEmpty()){
+                message.setText("Please enter a value in Celsius");
+            }
+            else{
+                tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
+            }
+        
+        
+        
+        
+        
+        
+        
+        
+        });
+
+        fahrToCel.setOnAction((e) ->{
+            if(tfFahrenheit.getText().isEmpty()){
+                message.setText("Please enter a value in Fahrenheit");
+            }
+            else{
+                tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
+            }
+        
+        
+        
+        
+        
+        
+        
+        });
+
+        clear.setOnAction((e) ->{
+            message.setText("");
+            tfCelsius.setText("");
+            tfFahrenheit.setText("");
+        
+        
+        
+        
+        
+        
+        
+        });
+
+
         
         //hBox settings
         hBox.setPadding(new Insets(10));
         hBox.getChildren().addAll(label1, tfCelsius,buttonBox, tfFahrenheit, label2);
         hBox.setSpacing(10);
         hBox.setAlignment(Pos.CENTER);
+
+        //a vbox that acts as a container for each element
+        VBox container = new VBox(hBox,message, clear);
+        container.setSpacing(10);
+        container.setAlignment(Pos.CENTER);
+
 
         //buttonBox settings
         buttonBox.setPadding(new Insets(10));
@@ -65,15 +133,15 @@ public class App extends Application {
 
         //Item placement on BorderPane
         
-        pane.setCenter(hBox);
-        pane.setBottom(clear);
+        pane.setCenter(container);
+        //pane.setBottom(clear);
         
 
 
 
         //BorderPane settings
        
-        BorderPane.setAlignment(hBox, Pos.CENTER);
+        BorderPane.setAlignment(container, Pos.CENTER);
         BorderPane.setAlignment(clear, Pos.TOP_CENTER);
         
         
@@ -85,9 +153,9 @@ public class App extends Application {
 
 
         // showing the BorderPane
-        Scene scene = new Scene(pane, 400, 180);
-        stage.setMinWidth(400);
-        stage.setMinHeight(180); 
+        Scene scene = new Scene(pane, 420, 200);
+        stage.setMinWidth(500);
+        stage.setMinHeight(220); 
         stage.setTitle("Μετατροπές θερμοκρασίας");
         stage.setScene(scene);
         stage.show();
@@ -97,5 +165,33 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
+
+//The two methods used to make the cast
+
+    String Cel_Fahr(int value){
+        int result=0;
+
+        
+        result = ((9/5)*value) + 32;
+        
+        return Integer.toString(result);
+    }
+
+
+    String Fahr_Cel(int value){
+        int result=0;
+
+
+        result = (5/9)*(value - 32);
+
+        return Integer.toString(result);
+    }
+
+
+
+
+
 
 }
