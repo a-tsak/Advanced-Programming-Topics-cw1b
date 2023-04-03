@@ -105,6 +105,41 @@ public class App extends Application {
         
         });
 
+        //text fields on enter
+        tfCelsius.setOnAction((e)->{
+            if(tfCelsius.getText().isEmpty()){
+                message.setText("Please enter a value in Celsius");
+            }
+            else{
+                tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
+            }
+
+
+
+
+        });
+
+        tfFahrenheit.setOnAction((e) ->{
+            if(tfFahrenheit.getText().isEmpty()){
+                message.setText("Please enter a value in Fahrenheit");
+            }
+            else{
+                tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
+            }
+        
+        
+        
+        
+        
+        
+        
+        });
+
+
+
+
+
+
 
         
         //hBox settings
@@ -127,14 +162,14 @@ public class App extends Application {
         //clear button settings
         clear.setPadding(new Insets(10,10,10,10));
         
-        BorderPane pane = new BorderPane();
+        
         
         
 
         //Item placement on BorderPane
-        
+        BorderPane pane = new BorderPane();
         pane.setCenter(container);
-        //pane.setBottom(clear);
+        
         
 
 
@@ -171,22 +206,19 @@ public class App extends Application {
 //The two methods used to make the cast
 
     String Cel_Fahr(int value){
-        int result=0;
+        double result;
 
-        
-        result = ((9/5)*value) + 32;
-        
-        return Integer.toString(result);
+        result = ((value*9)/5) + 32;
+        return Integer.toString((int)Math.round(result));
     }
 
 
     String Fahr_Cel(int value){
-        int result=0;
+        double result;
 
+        result = (5* (value-32))/9;
 
-        result = (5/9)*(value - 32);
-
-        return Integer.toString(result);
+        return Integer.toString((int)result);
     }
 
 
