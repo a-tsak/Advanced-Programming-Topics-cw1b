@@ -22,10 +22,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-
-
-
-
         // Initializing items
         Label label1 = new Label("Κελσίου   ");
         Label label2 = new Label("Φαρενάιτ");
@@ -49,31 +45,17 @@ public class App extends Application {
         Button fahrToCel = new Button("<-");
         Button clear = new Button("Καθαρισμός");
 
-
-        
         //Button Actions and Events
         celToFahr.setEffect(null);  //The buttons did a weird
         fahrToCel.setEffect(null);  //animation on hover so we disabled it
         
         celToFahr.setOnAction((e) ->{
-            
-
-
-            
             if(tfCelsius.getText().isEmpty()){
                 message.setText("Please enter a value in Celsius");
             }
             else{
                 tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
             }
-        
-        
-        
-        
-        
-        
-        
-        
         });
 
         fahrToCel.setOnAction((e) ->{
@@ -83,26 +65,12 @@ public class App extends Application {
             else{
                 tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
             }
-        
-        
-        
-        
-        
-        
-        
         });
 
         clear.setOnAction((e) ->{
             message.setText("");
             tfCelsius.setText("");
             tfFahrenheit.setText("");
-        
-        
-        
-        
-        
-        
-        
         });
 
         //text fields on enter
@@ -113,10 +81,6 @@ public class App extends Application {
             else{
                 tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
             }
-
-
-
-
         });
 
         tfFahrenheit.setOnAction((e) ->{
@@ -126,22 +90,8 @@ public class App extends Application {
             else{
                 tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
             }
-        
-        
-        
-        
-        
-        
-        
         });
 
-
-
-
-
-
-
-        
         //hBox settings
         hBox.setPadding(new Insets(10));
         hBox.getChildren().addAll(label1, tfCelsius,buttonBox, tfFahrenheit, label2);
@@ -153,7 +103,6 @@ public class App extends Application {
         container.setSpacing(10);
         container.setAlignment(Pos.CENTER);
 
-
         //buttonBox settings
         buttonBox.setPadding(new Insets(10));
         buttonBox.getChildren().addAll(celToFahr,fahrToCel);
@@ -162,31 +111,14 @@ public class App extends Application {
         //clear button settings
         clear.setPadding(new Insets(10,10,10,10));
         
-        
-        
-        
-
         //Item placement on BorderPane
         BorderPane pane = new BorderPane();
         pane.setCenter(container);
         
-        
-
-
-
         //BorderPane settings
-       
         BorderPane.setAlignment(container, Pos.CENTER);
         BorderPane.setAlignment(clear, Pos.TOP_CENTER);
         
-        
-
-
-
-
-
-
-
         // showing the BorderPane
         Scene scene = new Scene(pane, 420, 200);
         stage.setMinWidth(500);
@@ -207,7 +139,6 @@ public class App extends Application {
 
     String Cel_Fahr(int value){
         double result;
-
         result = ((value*9)/5) + 32;
         return Integer.toString((int)Math.round(result));
     }
@@ -215,15 +146,7 @@ public class App extends Application {
 
     String Fahr_Cel(int value){
         double result;
-
         result = (5* (value-32))/9;
-
-        return Integer.toString((int)result);
+        return Integer.toString((int)Math.round(result));
     }
-
-
-
-
-
-
 }
