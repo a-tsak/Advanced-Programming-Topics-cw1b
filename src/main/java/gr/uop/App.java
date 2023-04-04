@@ -92,21 +92,13 @@ public class App extends Application {
 
         //text fields on enter
         tfCelsius.setOnAction((e)->{
-            if(tfCelsius.getText().isEmpty()){
-                message.setText("Please enter a value in Celsius");
-            }
-            else{
-                tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
-            }
+            
+                celToFahr.fire();       //Presses the corresponding button
+                
         });
 
         tfFahrenheit.setOnAction((e) ->{
-            if(tfFahrenheit.getText().isEmpty()){
-                message.setText("Please enter a value in Fahrenheit");
-            }
-            else{
-                tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
-            }
+            fahrToCel.fire();       //Presses the corresponding button
         });
 
         //hBox settings
