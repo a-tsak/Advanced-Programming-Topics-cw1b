@@ -54,16 +54,33 @@ public class App extends Application {
                 message.setText("Please enter a value in Celsius");
             }
             else{
-                tfFahrenheit.setText(Cel_Fahr(Integer.parseInt(tfCelsius.getText())));
+                try{
+                    int value = Integer.parseInt(tfCelsius.getText());
+                    tfFahrenheit.setText(Cel_Fahr(value));
+                    message.setText("");
+                }
+                catch(Exception exception){
+                    message.setText("The value entered has to be an integer");
+                }
+               
             }
         });
 
         fahrToCel.setOnAction((e) ->{
             if(tfFahrenheit.getText().isEmpty()){
                 message.setText("Please enter a value in Fahrenheit");
+                
             }
             else{
-                tfCelsius.setText(Fahr_Cel(Integer.parseInt(tfFahrenheit.getText())));
+                try{
+                    int value = Integer.parseInt(tfFahrenheit.getText());
+                    tfCelsius.setText(Fahr_Cel(value));
+                    message.setText("");
+                }
+                catch(Exception exception){
+                    message.setText("The value entered has to be an integer");
+                }
+                
             }
         });
 
